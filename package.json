@@ -1,0 +1,7 @@
+{
+  "name": "hyper-gruvy-theme",
+  "version": "0.1.0",
+  "keywords": ["hyper", "theme", "gruvbox"],
+  "description": "Hyper terminal theme based on Gruvbox color scheme",
+  "dependencies": {}
+}
