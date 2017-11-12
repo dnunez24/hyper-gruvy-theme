@@ -1,3 +1,4 @@
+const chroma = require('chroma-js')
 const gruvbox = require('./gruvbox')
 
 const gruvboxLightTheme = gruvbox.themes.light
@@ -5,9 +6,10 @@ const gruvboxDarkTheme = gruvbox.themes.dark
 
 const theme = {
   light: {
-    activeTabBackground: gruvboxLightTheme.bg3,
+    activeBorder: gruvboxLightTheme.brightOrange,
     background: gruvboxLightTheme.bg0,
     border: 'transparent',
+    cursor: gruvboxDarkTheme.bg4,
     foreground: gruvboxLightTheme.fg,
 
     colors: {
@@ -31,9 +33,10 @@ const theme = {
   },
 
   dark: {
-    activeTabBackground: gruvboxDarkTheme.bg3,
+    activeBorder: gruvboxDarkTheme.brightOrange,
     background: gruvboxDarkTheme.bg0,
     border: 'transparent',
+    cursor: gruvboxDarkTheme.bg4,
     foreground: gruvboxDarkTheme.fg,
 
     colors: {
@@ -70,11 +73,19 @@ exports.decorateConfig = (config) => {
   // Hyper theme configuration options
   const backgroundColor = selectedTheme.background[contrastMode]
   const borderColor = selectedTheme.border
-  const foregroundColor = selectedTheme.foreground[contrastMode]
+  const foregroundColor = selectedTheme.foreground
   const colors = selectedTheme.colors
-  const cursorColor = 'rgb(146,131,116,0.8)'
+  const cursorColor = chroma(selectedTheme.cursor).alpha(0.7).css()
 
-  return Object.assign({}, config, {
+  // Settings for CSS interpolation
+  const cursorMixBlendMode = backgroundMode === 'dark' ? 'lighten' : 'darken'
+  const activeTabBorderColor = selectedTheme.activeBorder
+  const inactiveTabBackgroundColor = backgroundMode === 'dark'
+    ? chroma(selectedTheme.colors.black).brighten(0.1)
+    : chroma(selectedTheme.colors.black).darken(0.1)
+  const inactiveTabTextColor = chroma(foregroundColor).alpha(0.5).css()
+
+  const themeConfig = {
     backgroundColor,
     borderColor,
     colors,
@@ -82,25 +93,27 @@ exports.decorateConfig = (config) => {
     foregroundColor,
 
     css: `
-      .tabs_list,
-      .tab_tab {
-        color: ${foregroundColor} !important;
-        border-color: transparent !important;
-      }
-
-      .tab_tab {
-        background-color: transparent;
-      }
-
-      .tab_active {
-        background-color: ${selectedTheme.activeTabBackground};
-      }
-
-      .tab_active {
-        box-shadow: 0 2px 0 0 ${selectedTheme.colors.brightOrange} inset;
-      }
-
       ${config.css || ''}
+
+      .tabs_title {
+        color: ${foregroundColor} !important;
+      }
+
+      .tabs_list,
+      .tab_tab,
+      .tabs_borderShim {
+        color: ${inactiveTabTextColor} !important;
+        background-color: ${inactiveTabBackgroundColor} !important;
+        border-color: ${borderColor} !important;
+      }
+
+      .tab_tab.tab_active {
+        color: ${foregroundColor} !important;
+        background-color: ${backgroundColor} !important;
+        box-shadow: 0 2px 0 0 ${activeTabBorderColor} inset;
+      }
     `,
-  })
+  }
+
+  return Object.assign({}, config, themeConfig)
 }
