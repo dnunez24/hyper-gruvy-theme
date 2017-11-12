@@ -2,6 +2,8 @@
 
 [Hyper] terminal theme based on [Gruvbox] color scheme
 
+![Hyper Gruvy Theme](hyper-gruvy-theme.png)
+
 ## Installation
 
 ```bash
