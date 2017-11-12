@@ -10,7 +10,7 @@ hpm install hyper-gruvy-theme
 
 ## Configuration Options
 
-* `themeBackgroundMode`: `light` (default), `dark`
+* `themeBackgroundMode`: `light`, `dark` (default)
 * `themeContrastMode`: `soft`, `normal` (default), `hard`
 
 [Hyper]: https://hyper.is

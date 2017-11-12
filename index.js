@@ -5,7 +5,7 @@ const gruvboxDarkTheme = gruvbox.themes.dark
 
 const theme = {
   light: {
-    activeTabBackground: gruvboxLightTheme.bg2,
+    activeTabBackground: gruvboxLightTheme.bg3,
     background: gruvboxLightTheme.bg0,
     border: 'transparent',
     foreground: gruvboxLightTheme.fg,
@@ -31,7 +31,7 @@ const theme = {
   },
 
   dark: {
-    activeTabBackground: gruvboxDarkTheme.bg2,
+    activeTabBackground: gruvboxDarkTheme.bg3,
     background: gruvboxDarkTheme.bg0,
     border: 'transparent',
     foreground: gruvboxDarkTheme.fg,
@@ -59,7 +59,7 @@ const theme = {
 
 exports.decorateConfig = (config) => {
   const defaults = {
-    backgroundMode: 'light',
+    backgroundMode: 'dark',
     contrastMode: 'normal',
   }
 
