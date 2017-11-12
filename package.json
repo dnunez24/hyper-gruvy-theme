@@ -6,9 +6,11 @@
     "name": "David Nuñez"
   },
   "keywords": [
-    "hyper",
-    "theme",
-    "gruvbox"
+    "hyperterm",
+    "hyperterm-theme",
+    "gruvbox",
+    "gruvbox-dark",
+    "gruvbox-light"
   ],
   "description": "Hyper terminal theme based on Gruvbox color scheme",
   "homepage": "https://github.com/dnunez24/hyper-gruvy-theme",
