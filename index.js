@@ -102,4 +102,5 @@ exports.decorateConfig = (config) => {
 
       ${config.css || ''}
     `,
+  }
 }
